@@ -6,9 +6,11 @@ func IsMobile(input string) bool {
 		return false
 	}
 
-	prefix := n.National[:2]
+	return isMobileNational(n.National)
+}
 
-	switch prefix {
+func isMobileNational(national string) bool {
+	switch national[:2] {
 	case "71", "72":
 		return true
 	default:
