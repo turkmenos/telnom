@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a problem with telnom
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Example
+      description: Provide a minimal example if possible.
+      render: go
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Go version
+      placeholder: "go1.27.0"
