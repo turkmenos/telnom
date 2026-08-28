@@ -6,7 +6,11 @@ func IsFixedLine(input string) bool {
 	if err != nil {
 		return false
 	}
-	switch n.National[0] {
+	return isFixedLineNational(n.National)
+}
+
+func isFixedLineNational(national string) bool {
+	switch national[0] {
 	case '1', '2', '3', '4', '5':
 		return true
 	default:

@@ -171,3 +171,24 @@ func TestNormalizeInvalid(t *testing.T) {
 		}
 	}
 }
+
+func TestTypeOf(t *testing.T) {
+	tests := []struct {
+		input string
+		want  telnom.NumberType
+	}{
+		{"+99371123456", telnom.TypeMobile},
+		{"+99372123456", telnom.TypeMobile},
+		{"+99312123456", telnom.TypeFixedLine},
+		{"993 52 21 23 45", telnom.TypeFixedLine},
+		{"+99381234567", telnom.TypeUnknown},
+		{"invalid", telnom.TypeUnknown},
+	}
+
+	for _, tt := range tests {
+		got := telnom.TypeOf(tt.input)
+		if got != tt.want {
+			t.Errorf("TypeOf(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}

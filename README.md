@@ -39,6 +39,7 @@ func main() {
 	fmt.Println(telnom.OperatorOf("+99371123456"))
 	fmt.Println(telnom.IsMobile("+99371123456"))
 	fmt.Println(telnom.IsFixedLine("+99312123456"))
+	fmt.Println(telnom.TypeOf("+99371123456"))
 }
 ```
 
@@ -50,6 +51,7 @@ func main() {
 - Normalize phone numbers to E.164 format
 - Detect mobile numbers
 - Detect fixed-line numbers
+- Classify numbers as mobile, fixed-line, or unknown
 - Detect supported operators
 
 ## License
