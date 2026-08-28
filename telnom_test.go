@@ -103,3 +103,28 @@ func TestIsMobile(t *testing.T) {
 		}
 	}
 }
+
+func TestIsFixedLine(t *testing.T) {
+	tests := []struct {
+		input string
+		want  bool
+	}{
+		{"+99312123456", true},
+		{"+99324312345", true},
+		{"+99332212345", true},
+		{"+99342212345", true},
+		{"+99352212345", true},
+		{"993 12 12 34 56", true},
+		{"+99371123456", false},
+		{"+99372123456", false},
+		{"+99381234567", false},
+		{"invalid", false},
+	}
+
+	for _, tt := range tests {
+		got := telnom.IsFixedLine(tt.input)
+		if got != tt.want {
+			t.Errorf("IsFixedLine(%q) = %v, want %v", tt.input, got, tt.want)
+		}
+	}
+}

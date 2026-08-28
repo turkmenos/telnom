@@ -35,6 +35,7 @@ func main() {
 
 	fmt.Println(telnom.OperatorOf("+99371123456"))
 	fmt.Println(telnom.IsMobile("+99371123456"))
+	fmt.Println(telnom.IsFixedLine("+99312123456"))
 }
 ```
 
@@ -44,6 +45,7 @@ func main() {
 - Validate `+993` numbers
 - Format phone numbers
 - Detect mobile numbers
+- Detect fixed-line numbers
 - Detect supported operators
 
 ## License
