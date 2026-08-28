@@ -103,3 +103,71 @@ func TestIsMobile(t *testing.T) {
 		}
 	}
 }
+
+func TestIsFixedLine(t *testing.T) {
+	tests := []struct {
+		input string
+		want  bool
+	}{
+		{"+99312123456", true},
+		{"+99324312345", true},
+		{"+99332212345", true},
+		{"+99342212345", true},
+		{"+99352212345", true},
+		{"993 12 12 34 56", true},
+		{"+99371123456", false},
+		{"+99372123456", false},
+		{"+99381234567", false},
+		{"invalid", false},
+	}
+
+	for _, tt := range tests {
+		got := telnom.IsFixedLine(tt.input)
+		if got != tt.want {
+			t.Errorf("IsFixedLine(%q) = %v, want %v", tt.input, got, tt.want)
+		}
+	}
+}
+
+func TestNormalize(t *testing.T) {
+	tests := []struct {
+		input string
+		want  string
+	}{
+		{"+993 71 12 34 56", "+99371123456"},
+		{"+993-71-12-34-56", "+99371123456"},
+		{"99371123456", "+99371123456"},
+		{"+993 (71) 12-34-56", "+99371123456"},
+	}
+
+	for _, tt := range tests {
+		got, err := telnom.Normalize(tt.input)
+		if err != nil {
+			t.Errorf("Normalize(%q) returned error: %v", tt.input, err)
+			continue
+		}
+
+		if got != tt.want {
+			t.Errorf("Normalize(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}
+
+func TestNormalizeInvalid(t *testing.T) {
+	tests := []string{
+		"",
+		"+905551234567",
+		"+99371abc456",
+		"+99371123",
+	}
+
+	for _, input := range tests {
+		got, err := telnom.Normalize(input)
+		if err == nil {
+			t.Errorf("Normalize(%q) expected error, got %q", input, got)
+		}
+		if got != "" {
+			t.Errorf("Normalize(%q) = %q on error, want empty string", input, got)
+		}
+	}
+}
