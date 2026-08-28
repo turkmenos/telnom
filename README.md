@@ -33,6 +33,9 @@ func main() {
 	formatted, _ := telnom.Format("+99371123456")
 	fmt.Println(formatted)
 
+	normalized, _ := telnom.Normalize("+993-71-12-34-56")
+	fmt.Println(normalized)
+
 	fmt.Println(telnom.OperatorOf("+99371123456"))
 	fmt.Println(telnom.IsMobile("+99371123456"))
 	fmt.Println(telnom.IsFixedLine("+99312123456"))
@@ -44,6 +47,7 @@ func main() {
 - Parse Turkmen phone numbers
 - Validate `+993` numbers
 - Format phone numbers
+- Normalize phone numbers to E.164 format
 - Detect mobile numbers
 - Detect fixed-line numbers
 - Detect supported operators
