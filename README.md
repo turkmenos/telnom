@@ -29,6 +29,7 @@ func main() {
 
 	fmt.Println(number.CountryCode)
 	fmt.Println(number.National)
+	fmt.Println(number.E164())
 
 	formatted, _ := telnom.Format("+99371123456")
 	fmt.Println(formatted)
@@ -40,6 +41,7 @@ func main() {
 	fmt.Println(telnom.IsMobile("+99371123456"))
 	fmt.Println(telnom.IsFixedLine("+99312123456"))
 	fmt.Println(telnom.TypeOf("+99371123456"))
+	fmt.Println(telnom.RegionOf("+99312123456"))
 }
 ```
 
@@ -53,6 +55,7 @@ func main() {
 - Detect fixed-line numbers
 - Classify numbers as mobile, fixed-line, or unknown
 - Detect supported operators
+- Detect the region of fixed-line numbers
 
 ## License
 

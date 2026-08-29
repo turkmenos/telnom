@@ -172,6 +172,17 @@ func TestNormalizeInvalid(t *testing.T) {
 	}
 }
 
+func TestE164(t *testing.T) {
+	n, err := telnom.Parse("+993 71 12 34 56")
+	if err != nil {
+		t.Fatalf("Parse returned error: %v", err)
+	}
+
+	if got, want := n.E164(), "+99371123456"; got != want {
+		t.Errorf("E164() = %q, want %q", got, want)
+	}
+}
+
 func TestTypeOf(t *testing.T) {
 	tests := []struct {
 		input string
@@ -189,6 +200,29 @@ func TestTypeOf(t *testing.T) {
 		got := telnom.TypeOf(tt.input)
 		if got != tt.want {
 			t.Errorf("TypeOf(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}
+
+func TestRegionOf(t *testing.T) {
+	tests := []struct {
+		input string
+		want  telnom.Region
+	}{
+		{"+99312123456", telnom.RegionAshgabat},
+		{"+99313123456", telnom.RegionAhal},
+		{"+99324312345", telnom.RegionBalkan},
+		{"+99332212345", telnom.RegionDashoguz},
+		{"+99342212345", telnom.RegionLebap},
+		{"+99352212345", telnom.RegionMary},
+		{"+99371123456", telnom.RegionUnknown},
+		{"+99381234567", telnom.RegionUnknown},
+		{"invalid", telnom.RegionUnknown},
+	}
+
+	for _, tt := range tests {
+		if got := telnom.RegionOf(tt.input); got != tt.want {
+			t.Errorf("RegionOf(%q) = %q, want %q", tt.input, got, tt.want)
 		}
 	}
 }
