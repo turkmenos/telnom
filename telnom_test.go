@@ -172,6 +172,17 @@ func TestNormalizeInvalid(t *testing.T) {
 	}
 }
 
+func TestE164(t *testing.T) {
+	n, err := telnom.Parse("+993 71 12 34 56")
+	if err != nil {
+		t.Fatalf("Parse returned error: %v", err)
+	}
+
+	if got, want := n.E164(), "+99371123456"; got != want {
+		t.Errorf("E164() = %q, want %q", got, want)
+	}
+}
+
 func TestTypeOf(t *testing.T) {
 	tests := []struct {
 		input string

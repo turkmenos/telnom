@@ -5,5 +5,5 @@ func Normalize(input string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return "+" + number.CountryCode + number.National, nil
+	return number.E164(), nil
 }

@@ -29,6 +29,7 @@ func main() {
 
 	fmt.Println(number.CountryCode)
 	fmt.Println(number.National)
+	fmt.Println(number.E164())
 
 	formatted, _ := telnom.Format("+99371123456")
 	fmt.Println(formatted)
